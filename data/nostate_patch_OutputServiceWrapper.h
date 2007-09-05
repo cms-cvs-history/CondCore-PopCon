@@ -3,9 +3,9 @@
 
 //#include "CondCore/DBOutputService/interface/PoolDBOutputService.h"
 #include "CondCore/DBOutputService/interface/PopConDBOutputService.h"
-#include "IOVPair.h"
+#include "CondCore/PopCon/interface/IOVPair.h"
 #include "CondCore/PopCon/interface/Logger.h"
-#include "Exception.h"
+#include "CondCore/PopCon/interface/Exception.h"
 #include <algorithm>
 
 //bool operator< (const popcon::IOVPair& a, const popcon::IOVPair& b)
@@ -55,7 +55,6 @@ namespace popcon
 				void write (std::vector<std::pair<T*,popcon::IOVPair> >* m_payload_vect, popcon::Logger * lgr, std::string& logMsg, unsigned int lsc, bool since)
 				{	
 
-					//TODO - sort the vector, so that the IOV sequence is respected
 					typename std::vector<std::pair<T*,popcon::IOVPair> >::iterator it;
 					if (since)
 						//sort ascending so the since order is respected 
@@ -95,7 +94,6 @@ namespace popcon
 									}
 								}
 								catch(std::exception& er){
-									//TODO info in main log (now OK)
 									std::cerr << "DB output exception: " << er.what();
 									//lgr->finalizePayload("Output Service Exception"+(std::string)er.what());
 									continue;

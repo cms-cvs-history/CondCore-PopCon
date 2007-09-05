@@ -9,7 +9,7 @@
 
 #include "FWCore/ServiceRegistry/interface/Service.h"
 //#include "CondCore/DBOutputService/interface/PoolDBOutputService.h"
-#include "OutputServiceWrapper.h"
+#include "CondCore/PopCon/interface/OutputServiceWrapper.h"
 
 
 // user include files
@@ -18,7 +18,7 @@
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
-#include "PopConSourceHandler.h"
+#include "CondCore/PopCon/interface/PopConSourceHandler.h"
 #include "CondCore/PopCon/interface/StateCreator.h"
 //#include "PopCon/State/interface/Logger.h"
 

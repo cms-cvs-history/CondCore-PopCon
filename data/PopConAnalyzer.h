@@ -9,7 +9,7 @@
 
 #include "FWCore/ServiceRegistry/interface/Service.h"
 //#include "CondCore/DBOutputService/interface/PoolDBOutputService.h"
-#include "OutputServiceWrapper.h"
+#include "CondCore/PopCon/interface/OutputServiceWrapper.h"
 
 
 // user include files
@@ -18,7 +18,7 @@
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
-#include "PopConSourceHandler.h"
+#include "CondCore/PopCon/interface/PopConSourceHandler.h"
 #include "CondCore/PopCon/interface/StateCreator.h"
 //#include "CondCore/PopCon/interface/Logger.h"
 
@@ -46,7 +46,7 @@ namespace popcon
 					m_offline_connection = pset.getParameter<std::string> ("OfflineDBSchema");
 					m_catalog = pset.getParameter<std::string> ("catalog");
 					sinceAppend = pset.getParameter<bool> ("SinceAppendMode");
-					m_handler_object = NULL;
+					m_handler_object = 0;
 				}
 				~PopConAnalyzer()
 				{
@@ -80,7 +80,7 @@ namespace popcon
 						std::cerr << "Exception caught in destructor: "<< e.what();
 					}
 
-					if (m_handler_object != NULL){
+					if (m_handler_object != 0){
 						std::cerr << "Deleting the source handler\n";	
 						delete m_handler_object;
 					}
