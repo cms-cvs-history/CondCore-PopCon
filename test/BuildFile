@@ -1,0 +1,7 @@
+<bin name=CoralTest file=stubs/CoralIface.cpp,stubs/doTheQuery.cpp>
+<use name=CondCore/DBCommon>
+<use name=ObjectRelationalAccess>
+<use name=RelationalStorageService>
+<use name=CoralCommon>
+</bin>
+

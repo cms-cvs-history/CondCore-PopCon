@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<connectionlist>
+	
+<connection name="oracle://omds/CMS_TRACKER_DCS">
+<parameter name="user" value="CMS_TRACKER_DCS"/>
+<parameter name="password" value="trackermtcc06"/>
+</connection>
+
+</connectionlist>
