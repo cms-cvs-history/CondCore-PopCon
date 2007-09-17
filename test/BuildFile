@@ -5,3 +5,11 @@
 <use name=CoralCommon>
 </bin>
 
+<use name=CondFormats/CSCObjects>
+<use name=CondFormats/DataRecord>
+<use name=CondCore/PopCon>
+
+<library name=CSCTestAnalyzer file=stubs/CSCSourceHandler.cpp,stubs/CSCTestAnalyzer.cpp,stubs/CSCFakePedestalsConditions.cpp>
+  <flags EDM_PLUGIN=1>
+</library>
+

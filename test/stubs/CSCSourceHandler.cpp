@@ -1,0 +1,50 @@
+#include "CSCSourceHandler.h"
+
+popcon::CSCPedestalsImpl::CSCPedestalsImpl(std::string name, std::string cstring, std::string cat,const edm::Event& evt, const edm::EventSetup& est) : popcon::PopConSourceHandler<CSCPedestals>(name,cstring,cat,evt,est)
+{
+}
+
+popcon::CSCPedestalsImpl::~CSCPedestalsImpl()
+{
+}
+
+void popcon::CSCPedestalsImpl::getNewObjects()
+{
+
+	std::cout << "------- CSC src - > getNewObjects\n";
+	
+	//check whats already inside of database
+	
+	std::map<std::string, popcon::PayloadIOV> mp = getOfflineInfo();
+
+	for(std::map<std::string, popcon::PayloadIOV>::iterator it = mp.begin(); it != mp.end();it++)
+	{
+		std::cout << it->first << " , last object valid since " << it->second.last_since << std::endl;
+
+	}
+	
+	unsigned int snc,tll;
+	
+	std::cerr << "Source implementation test ::getNewObjects : enter since ? \n";
+	std::cin >> snc;
+	std::cerr << "getNewObjects : enter till ? \n";
+	std::cin >> tll;
+
+	edm::ESHandle<CSCPedestals> pedestals;
+	esetup.get<CSCPedestalsRcd>().get(pedestals);
+	mypedestals = pedestals.product();
+	std::cout << "size " << mypedestals->pedestals.size() << std::endl;
+
+	popcon::IOVPair iop = {snc,tll};
+	popcon::IOVPair iop2 = {snc+20,tll};
+	popcon::IOVPair iop3 = {snc+10,tll};
+
+	CSCPedestals * p1 = new CSCPedestals(*mypedestals);
+	CSCPedestals * p2 = new CSCPedestals(*mypedestals);
+	
+	m_to_transfer->push_back(std::make_pair((CSCPedestals*)mypedestals,iop));
+	m_to_transfer->push_back(std::make_pair((CSCPedestals*)p1,iop2));
+	m_to_transfer->push_back(std::make_pair((CSCPedestals*)p2,iop3));
+
+	std::cout << "CSC src - > getNewObjects -----------\n";
+}
