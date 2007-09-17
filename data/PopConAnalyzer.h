@@ -68,7 +68,8 @@ namespace popcon
 							lgr->finalizeExecution(logMsg);
 							stc->generateStatusData();
 							stc->storeStatusData();
-							std::cerr << "Deleting stc\n";	
+							if(m_debug)
+								std::cerr << "Deleting stc\n";	
 							delete stc;
 						}
 
@@ -81,10 +82,12 @@ namespace popcon
 					}
 
 					if (m_handler_object != 0){
-						std::cerr << "Deleting the source handler\n";	
+						if(m_debug)
+							std::cerr << "Deleting the source handler\n";	
 						delete m_handler_object;
 					}
-					std::cerr << "Deleting lgr\n";	
+					if(m_debug)
+						std::cerr << "Deleting lgr\n";	
 					delete lgr;
 
 					if(m_debug)
@@ -101,10 +104,10 @@ namespace popcon
 				bool tryToValidate;
 				//corrupted data detected, just write the log and exit
 				bool corrupted;
+				bool greenLight;
 				//Someone claims to have fixed the problem indicated in exception section
 				//TODO log it as well
 				bool fixed;
-				bool greenLight;
 				bool sinceAppend;
 				std::string logMsg;
 
@@ -113,12 +116,12 @@ namespace popcon
 					if(m_debug)
 						std::cerr << "Begin Job\n"; 
 					try{
-						lgr = new Logger(m_popcon_db,m_payload_name,m_debug);
+						lgr = new Logger(m_popcon_db, m_offline_connection, m_payload_name,m_debug);
 						//lock the run (other instances of analyzer of the same typename will be blocked till the end of execution)
 						lgr->lock();
 						//log the new app execution
 						lgr->newExecution();
-						
+
 						stc = new StateCreator(m_popcon_db, m_offline_connection, m_payload_name, m_debug);
 
 						//checks the exceptions, validates new data if necessary
@@ -140,7 +143,7 @@ namespace popcon
 
 						if (stc->checkAndCompareState())
 						{
-							std::cerr << "State OK" << std::endl;
+							//std::cerr << "State OK" << std::endl;
 							greenLight = true;
 							logMsg="OK";
 							corrupted = false;

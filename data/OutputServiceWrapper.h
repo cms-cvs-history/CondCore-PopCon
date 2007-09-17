@@ -64,7 +64,8 @@ namespace popcon
 									if (poolDbService->isNewTagRequest(poolDbService->getRecord()) ){
 										std::cerr << "Creating new IOV\n"; 
 										poolDbService->createNewIOV<T>((*it).first, (*it).second.till, poolDbService->getRecord());
-									}else
+									}
+									else
 									{
 										if (since){
 											std::cerr << "Appending since time\n"; 
@@ -104,11 +105,9 @@ namespace popcon
 				}
 
 			private:
-				//edm::Service<cond::service::PoolDBOutputService>& poolDbService;
 				edm::Service<popcon::service::PopConDBOutputService>& poolDbService;
 		};
 }
-
 #endif
 
 
