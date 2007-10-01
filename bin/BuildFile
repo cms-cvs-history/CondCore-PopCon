@@ -1,0 +1,7 @@
+<bin name=cmscond_popcon_register file=cmscond_popcon_register.cpp>
+<use name=CondCore/PopCon>
+<use name=CondCore/DBCommon>
+<use name=ObjectRelationalAccess>
+<use name=RelationalStorageService>
+<use name=CoralCommon>
+</bin>
