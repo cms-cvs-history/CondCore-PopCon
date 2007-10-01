@@ -30,11 +30,20 @@ void popcon::CSCPedestalsImpl::getNewObjects()
 	std::cerr << "getNewObjects : enter till ? \n";
 	std::cin >> tll;
 
-	edm::ESHandle<CSCPedestals> pedestals;
-	esetup.get<CSCPedestalsRcd>().get(pedestals);
-	mypedestals = pedestals.product();
-	std::cout << "size " << mypedestals->pedestals.size() << std::endl;
 
+	//the following code works, however since 1.6.0_pre7 it causes glibc 
+	//double free error (inside CSC specific code) - commented 
+	//
+	//Using ES to get the data:
+
+/*	edm::ESHandle<CSCPedestals> pedestals;
+	//esetup.get<CSCPedestalsRcd>().get(pedestals);
+	//mypedestals = pedestals.product();
+	std::cout << "size " << mypedestals->pedestals.size() << std::endl;
+*/
+	//changed to an empty object
+	mypedestals = new CSCPedestals();
+	
 	popcon::IOVPair iop = {snc,tll};
 	popcon::IOVPair iop2 = {snc+20,tll};
 	popcon::IOVPair iop3 = {snc+10,tll};
