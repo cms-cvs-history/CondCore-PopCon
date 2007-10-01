@@ -42,7 +42,6 @@ namespace popcon
 					//Policy if corrupted data found
 					m_debug = pset.getParameter< bool > ("debug");
 					m_offline_connection = pset.getParameter<std::string> ("OfflineDBSchema");
-					m_catalog = pset.getParameter<std::string> ("catalog");
 					sinceAppend = pset.getParameter<bool> ("SinceAppendMode");
 
 				}
@@ -137,7 +136,6 @@ namespace popcon
 				PopConSourceHandler<T>* m_handler_object;	
 				//connect string for offline cond db access;
 				std::string m_offline_connection;
-				std::string m_catalog;
 
 				void displayHelper()
 				{
