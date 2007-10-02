@@ -1,0 +1,17 @@
+block PopConDB = {
+	string connect = "protocol://db/schema"
+        string popConDBSchema = "oracle://omds/CMS_POP_CON"
+	untracked string catalog = ""
+	string timetype = "runnumber"
+	PSet DBParameters = {
+		untracked string authenticationPath="."
+		untracked int32 messageLevel=0
+		untracked bool loadBlobStreamer = false
+		untracked int32 connectionTimeOut = 600
+		untracked int32 connectionRetrialPeriod = 30
+		untracked int32 connectionRetrialTimeOut = 180
+		untracked bool enableConnectionSharing = false
+		untracked bool enableReadOnlySessionOnUpdateConnection = false
+		untracked bool enablePoolAutomaticCleanUp = true
+	} 
+}
