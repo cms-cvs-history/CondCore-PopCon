@@ -1,7 +1,11 @@
 #include "CSCSourceHandler.h"
 
-popcon::CSCPedestalsImpl::CSCPedestalsImpl(std::string name, std::string cstring, std::string cat,const edm::Event& evt, const edm::EventSetup& est) : popcon::PopConSourceHandler<CSCPedestals>(name,cstring,cat,evt,est)
+popcon::CSCPedestalsImpl::CSCPedestalsImpl(std::string name, std::string cstring, std::string cat,const edm::Event& evt, const edm::EventSetup& est, std::string pconnect) : popcon::PopConSourceHandler<CSCPedestals>(name,cstring,cat,evt,est), m_pop_connect(pconnect)
 {
+	m_name = name;
+	m_cs = cstring;
+	lgrdr = new LogReader(m_pop_connect);
+	
 }
 
 popcon::CSCPedestalsImpl::~CSCPedestalsImpl()
@@ -22,6 +26,8 @@ void popcon::CSCPedestalsImpl::getNewObjects()
 		std::cout << it->first << " , last object valid since " << it->second.last_since << std::endl;
 
 	}
+
+	coral::TimeStamp ts = lgrdr->lastRun(m_name, m_cs);
 	
 	unsigned int snc,tll;
 	
