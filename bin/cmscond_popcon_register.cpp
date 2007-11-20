@@ -13,7 +13,7 @@
 #include "CoralBase/Attribute.h"
 #include "CoralBase/TimeStamp.h"
 
-#include "CondCore/DBCommon/interface/RelationalStorageManager.h"
+#include "CondCore/DBCommon/interface/CoralTransaction.h"
 #include "CondCore/DBCommon/interface/AuthenticationMethod.h"
 #include "CondCore/DBCommon/interface/SessionConfiguration.h"
 #include "CondCore/DBCommon/interface/ConnectionConfiguration.h"
@@ -35,17 +35,14 @@ class PopConRegister
 	public:	
 		PopConRegister(std::string connectionString) : m_connect(connectionString) {
 
-			session=new cond::DBSession(false);
-			session->sessionConfiguration().setAuthenticationMethod( cond::XML );
-			session->sessionConfiguration().setMessageLevel( cond::Error );
-			session->connectionConfiguration().setConnectionRetrialTimeOut(60);
+			session=new cond::DBSession;
+			session->configuration().setAuthenticationMethod( cond::XML );
+			session->configuration().setMessageLevel( cond::Error );
+			session->configuration().connectionConfiguration()->setConnectionRetrialTimeOut(60);
 			initialize();
 		}
 
 		virtual ~PopConRegister(){
-
-			m_coraldb->disconnect();	
-			delete m_coraldb;
 			delete session;
 		}
 
@@ -120,7 +117,7 @@ class PopConRegister
 		}
 		std::string m_connect;
 		cond::DBSession* session;
-		cond::RelationalStorageManager* m_coraldb;
+		cond::CoralTransaction* m_coraldb;
 };
 
 int main(int argc, char** argv)
