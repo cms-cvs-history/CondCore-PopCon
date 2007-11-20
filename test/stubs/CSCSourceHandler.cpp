@@ -1,6 +1,10 @@
 #include "CSCSourceHandler.h"
 
-popcon::CSCPedestalsImpl::CSCPedestalsImpl(std::string name, std::string cstring, std::string cat,const edm::Event& evt, const edm::EventSetup& est, std::string pconnect) : popcon::PopConSourceHandler<CSCPedestals>(name,cstring,cat,evt,est), m_pop_connect(pconnect)
+popcon::CSCPedestalsImpl::CSCPedestalsImpl(const std::string& name, 
+					   const std::string& cstring, 
+					   const edm::Event& evt, 
+					   const edm::EventSetup& est, 
+					   const std::string& pconnect) : popcon::PopConSourceHandler<CSCPedestals>(name,cstring,evt,est), m_pop_connect(pconnect)
 {
 	m_name = name;
 	m_cs = cstring;

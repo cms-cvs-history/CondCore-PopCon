@@ -14,6 +14,13 @@
 #include "CoralBase/Attribute.h"
 #include "CoralBase/TimeStamp.h"
 
+#include "CondCore/DBCommon/interface/SessionConfiguration.h"
+#include "CondCore/DBCommon/interface/ConnectionConfiguration.h"
+#include "CondCore/DBCommon/interface/ConnectionHandler.h"
+#include "CondCore/DBCommon/interface/CoralTransaction.h"
+#include "CondCore/DBCommon/interface/Connection.h"
+#include "CondCore/DBCommon/interface/DBSession.h"
+static cond::ConnectionHandler& conHandler=cond::ConnectionHandler::Instance();
 CoralIface::CoralIface (std::string connectionString) : m_connect(connectionString) {
 
 	session=new cond::DBSession;
@@ -25,15 +32,14 @@ CoralIface::CoralIface (std::string connectionString) : m_connect(connectionStri
 
 CoralIface::~CoralIface ()
 {	
-	m_coraldb->disconnect();	
-	delete m_coraldb;
-	delete session;
+  m_coraldb->commit();
+  //delete m_coraldb;
+  delete session;
 }
 
 void  CoralIface::initialize()
 {		
   try{
-    static cond::ConnectionHandler& conHandler=cond::ConnectionHandler::Instance();
     conHandler.registerConnection(m_connect,m_connect,0);
     session->open();
     conHandler.connect(session);

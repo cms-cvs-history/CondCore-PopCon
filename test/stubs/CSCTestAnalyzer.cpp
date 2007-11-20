@@ -10,7 +10,7 @@ CSCTestAnalyzer::CSCTestAnalyzer(const edm::ParameterSet& ps) : PopConAnalyzer<C
 
 void CSCTestAnalyzer::CSCTestAnalyzer::initSource(const edm::Event& evt, const edm::EventSetup& est)
 {
-	this->m_handler_object =new CSCPedestalsImpl("CSCPedestals",m_offline_connection, m_catalog,evt,est, m_pop_connection);
+	this->m_handler_object =new CSCPedestalsImpl("CSCPedestals",m_offline_connection,evt,est, m_pop_connection);
 }
 
 //define this as a plug-in
