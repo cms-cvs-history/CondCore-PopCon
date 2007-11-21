@@ -16,26 +16,23 @@
 #include "FWCore/Framework/interface/EventSetup.h"
 #include "CSCFakePedestalsConditions.h"
 
-namespace popcon
-{
-	class CSCPedestalsImpl : public popcon::PopConSourceHandler<CSCPedestals>
-	{
-
-		public:
-			void getNewObjects();
-			~CSCPedestalsImpl(); 
-			CSCPedestalsImpl(const std::string&,
-					 const std::string&, 
-					 const edm::Event& evt, 
-					 const edm::EventSetup& est, 
-					 const std::string&); 
-
-		private:
-			std::string m_pop_connect; //connect string to popcon metaschema
-			std::string m_name;
-			std::string m_cs;
-			const CSCPedestals * mypedestals;
-			LogReader* lgrdr;
+namespace popcon{
+	class CSCPedestalsImpl : public popcon::PopConSourceHandler<CSCPedestals>{
+	public:
+	  void getNewObjects();
+	  ~CSCPedestalsImpl(); 
+	  CSCPedestalsImpl(const std::string&,
+			   const std::string&, 
+			   const edm::Event& evt, 
+			   const edm::EventSetup& est, 
+			   const std::string&); 
+	  
+	private:
+	  std::string m_pop_connect; //connect string to popcon metaschema
+	  std::string m_name;
+	  std::string m_cs;
+	  //const CSCPedestals * mypedestals;
+	  LogReader* lgrdr;
 	};
 }
 #endif
