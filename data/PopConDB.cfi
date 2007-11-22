@@ -1,7 +1,6 @@
 block PopConDB = {
 	string connect = "protocol://db/schema"
         string popConDBSchema = "oracle://omds/CMS_POP_CON"
-	untracked string catalog = ""
 	string timetype = "runnumber"
 	PSet DBParameters = {
 		untracked string authenticationPath="."

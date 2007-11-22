@@ -1,5 +1,5 @@
 #include "CSCTestAnalyzer.h"
-
+#include <iostream>
 using namespace popcon;
 
 CSCTestAnalyzer::CSCTestAnalyzer(const edm::ParameterSet& ps) : PopConAnalyzer<CSCPedestals>(ps,"CSCPedestals")
@@ -10,7 +10,9 @@ CSCTestAnalyzer::CSCTestAnalyzer(const edm::ParameterSet& ps) : PopConAnalyzer<C
 
 void CSCTestAnalyzer::CSCTestAnalyzer::initSource(const edm::Event& evt, const edm::EventSetup& est)
 {
-	this->m_handler_object =new CSCPedestalsImpl("CSCPedestals",m_offline_connection,evt,est, m_pop_connection);
+  std::cout<<"CSCTestAnalyzer::initSource"<<std::endl;
+  this->m_handler_object =new CSCPedestalsImpl("CSCPedestals",m_offline_connection,evt,est, m_pop_connection);
+  std::cout<<"about to end initSource"<<std::endl;
 }
 
 //define this as a plug-in

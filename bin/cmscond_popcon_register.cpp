@@ -41,24 +41,16 @@ public:
     session->configuration().setMessageLevel( cond::Error );
     session->configuration().connectionConfiguration()->setConnectionRetrialTimeOut(60);
     initialize();
+    conHandler.connect(session);
   }
   
   virtual ~PopConRegister(){
     delete session;
   }
   
-  void commit()
-  {
-    m_coraldb->commit();
-  }
-  void rollback()
-  {
-    m_coraldb->rollback();
-  }
-  
-  void doList()
-  {
+  void doList(){
     cond::CoralTransaction& coraldb=conHandler.getConnection(m_connect)->coralTransaction(true);
+    coraldb.start();
     coral::ITable& mytable=coraldb.coralSessionProxy().nominalSchema().tableHandle("P_CON_PAYLOAD_STATE");
     std::auto_ptr< coral::IQuery > query(mytable.newQuery());
     query->addToOutputList("NAME");
@@ -192,14 +184,12 @@ int main(int argc, char** argv)
       pcr->doRegister(myObject, userConnect);
       stc->generateStatusData();
       stc->storeStatusData();
-      //pcr->commit();
     }else{
       pcr->doList();
     }
     delete pcr;
     delete stc;
   } catch ( std::exception& e ) {
-    //pcr->rollback();
     std::cerr << "Error :  " << e.what() << std::endl;
     exit(EXIT_FAILURE);
   }
