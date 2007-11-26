@@ -16,50 +16,44 @@
 
 #include "CondCore/DBCommon/interface/SessionConfiguration.h"
 #include "CondCore/DBCommon/interface/ConnectionConfiguration.h"
-#include "CondCore/DBCommon/interface/ConnectionHandler.h"
+//#include "CondCore/DBCommon/interface/ConnectionHandler.h"
 #include "CondCore/DBCommon/interface/CoralTransaction.h"
 #include "CondCore/DBCommon/interface/Connection.h"
 #include "CondCore/DBCommon/interface/DBSession.h"
-static cond::ConnectionHandler& conHandler=cond::ConnectionHandler::Instance();
+//static cond::ConnectionHandler& conHandler=cond::ConnectionHandler::Instance();
 CoralIface::CoralIface (std::string connectionString) : m_connect(connectionString) {
-
-	session=new cond::DBSession;
-	session->configuration().setAuthenticationMethod( cond::XML );
-	session->configuration().setMessageLevel( cond::Error );
-	session->configuration().connectionConfiguration()->setConnectionRetrialTimeOut(60);
-	initialize();
+  session=new cond::DBSession;
+  session->configuration().setAuthenticationMethod( cond::XML );
+  session->configuration().setMessageLevel( cond::Error );
+  //session->configuration().connectionConfiguration()->setConnectionRetrialTimeOut(60);
+  initialize();
 }
 
 CoralIface::~CoralIface ()
 {	
-  m_coraldb->commit();
-  //delete m_coraldb;
+  //  m_coraldb->commit();
   delete session;
 }
 
 void  CoralIface::initialize()
 {		
   try{
-    conHandler.registerConnection(m_connect,m_connect,0);
     session->open();
-    conHandler.connect(session);
-    cond::Connection* myconnection=conHandler.getConnection(m_connect);
-    m_coraldb=&(myconnection->coralTransaction(true));
-    m_coraldb->start();
   }catch(cond::Exception& er){
     std::cerr<< "CoralIface::initialize cond " << er.what()<<std::endl;
     throw;
   }catch(std::exception& er){
     std::cerr<< "CoralIface::initialize std " << er.what()<<std::endl;
     throw;
-  }catch(...){
-    std::cerr<<"Unknown error"<<std::endl;
   }
 }
 
-void CoralIface::doQuery()
-{
+void CoralIface::doQuery(){
   try{
+    cond::Connection myconnection(m_connect,-1);
+    myconnection.connect(session);
+    cond::CoralTransaction& coraldb=myconnection.coralTransaction();
+    coraldb.start(true);
     coral::ITable& mytable=m_coraldb->coralSessionProxy().nominalSchema().tableHandle("FWCAENCHANNEL");
     std::auto_ptr< coral::IQuery > query(mytable.newQuery());
     query->addToOutputList("CHANGE_DATE");
@@ -88,8 +82,9 @@ void CoralIface::doQuery()
       //std::cout << " " << as << " " << id << std::endl;
     }
     cursor.close();
-  }
-  catch(std::exception& er){
+    coraldb.commit();
+    myconnection.disconnect();
+  }catch(std::exception& er){
     std::cerr << er.what();
   }
 }

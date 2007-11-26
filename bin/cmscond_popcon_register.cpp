@@ -39,7 +39,7 @@ public:
     session=new cond::DBSession;
     session->configuration().setAuthenticationMethod( cond::XML );
     session->configuration().setMessageLevel( cond::Error );
-    session->configuration().connectionConfiguration()->setConnectionRetrialTimeOut(60);
+    //session->configuration().connectionConfiguration()->setConnectionRetrialTimeOut(60);
     initialize();
     conHandler.connect(session);
   }
@@ -49,8 +49,8 @@ public:
   }
   
   void doList(){
-    cond::CoralTransaction& coraldb=conHandler.getConnection(m_connect)->coralTransaction(true);
-    coraldb.start();
+    cond::CoralTransaction& coraldb=conHandler.getConnection(m_connect)->coralTransaction();
+    coraldb.start(true);
     coral::ITable& mytable=coraldb.coralSessionProxy().nominalSchema().tableHandle("P_CON_PAYLOAD_STATE");
     std::auto_ptr< coral::IQuery > query(mytable.newQuery());
     query->addToOutputList("NAME");
@@ -65,9 +65,9 @@ public:
   }
   
   void doRegister(const std::string& object, const std::string& cstring){
-    cond::CoralTransaction& coraldb=conHandler.getConnection(m_connect)->coralTransaction(false);
+    cond::CoralTransaction& coraldb=conHandler.getConnection(m_connect)->coralTransaction();
     try{
-      coraldb.start();
+      coraldb.start(false);
       coral::ITable& mytable=coraldb.coralSessionProxy().nominalSchema().tableHandle("P_CON_LOCK");
       coral::AttributeList rowBuffer;
       coral::ITableDataEditor& dataEditor = mytable.dataEditor();
