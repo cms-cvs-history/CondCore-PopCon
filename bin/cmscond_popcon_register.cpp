@@ -49,6 +49,7 @@ public:
   }
   
   void doList(){
+    std::cout<<"doList"<<std::endl;
     cond::CoralTransaction& coraldb=conHandler.getConnection(m_connect)->coralTransaction();
     coraldb.start(true);
     coral::ITable& mytable=coraldb.coralSessionProxy().nominalSchema().tableHandle("P_CON_PAYLOAD_STATE");
@@ -67,6 +68,7 @@ public:
   void doRegister(const std::string& object, const std::string& cstring){
     cond::CoralTransaction& coraldb=conHandler.getConnection(m_connect)->coralTransaction();
     try{
+      std::cout<<"doRegister"<<std::endl;
       coraldb.start(false);
       coral::ITable& mytable=coraldb.coralSessionProxy().nominalSchema().tableHandle("P_CON_LOCK");
       coral::AttributeList rowBuffer;
@@ -86,23 +88,18 @@ public:
       dataEditor2.insertRow( rowBuffer2 );  
       coraldb.commit();
     }catch(std::exception& er){
-      std::cerr << er.what();
-      coraldb.rollback();
+      throw cond::Exception( std::string(er.what()));      
     }
   }
   
 private:
   void initialize(){
+    std::cout<<"initialize"<<std::endl;
     try{
       session->open();
-    }catch(cond::Exception& er){
-      std::cerr<< "PopConRegister::initialize cond " << er.what()<<std::endl;
-      throw;
     }catch(std::exception& er){
       std::cerr<< "PopConRegister::initialize std " << er.what()<<std::endl;
-      throw;
-    }catch(...){
-      std::cerr<<"Unknown error"<<std::endl;
+      throw er;
     }
   }
   std::string m_connect;
@@ -155,6 +152,7 @@ int main(int argc, char** argv)
   if( vm.count("authPath") ){
     authPath=vm["authPath"].as<std::string>();
     std::string authenv(std::string("CORAL_AUTH_PATH=")+authPath);
+    std::cout<<"authenv "<<authenv<<std::endl;
     ::putenv(const_cast<char*>(authenv.c_str()));
   }
   

@@ -12,6 +12,7 @@ void CSCTestAnalyzer::CSCTestAnalyzer::initSource(const edm::Event& evt, const e
 {
   std::cout<<"CSCTestAnalyzer::initSource"<<std::endl;
   this->m_handler_object =new CSCPedestalsImpl("CSCPedestals",m_offline_connection,evt,est, m_pop_connection);
+  std::cout<<"handler created "<<m_handler_object<<std::endl;
   std::cout<<"about to end initSource"<<std::endl;
 }
 
