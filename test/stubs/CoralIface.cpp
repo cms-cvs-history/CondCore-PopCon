@@ -3,23 +3,14 @@
 #include "RelationalAccess/ISessionProxy.h"
 #include "RelationalAccess/ISchema.h"
 #include "RelationalAccess/ITable.h"
-#include "RelationalAccess/TableDescription.h"
-#include "RelationalAccess/ITablePrivilegeManager.h"
 #include "RelationalAccess/ICursor.h"
 #include "RelationalAccess/IQuery.h"
-#include "RelationalAccess/ITableDataEditor.h"
-#include "CoralBase/Exception.h"
 #include "CoralBase/AttributeList.h"
-#include "CoralBase/AttributeSpecification.h"
 #include "CoralBase/Attribute.h"
 #include "CoralBase/TimeStamp.h"
 
-#include "CondCore/DBCommon/interface/SessionConfiguration.h"
-#include "CondCore/DBCommon/interface/ConnectionConfiguration.h"
 //#include "CondCore/DBCommon/interface/ConnectionHandler.h"
-#include "CondCore/DBCommon/interface/CoralTransaction.h"
 #include "CondCore/DBCommon/interface/Connection.h"
-#include "CondCore/DBCommon/interface/DBSession.h"
 //static cond::ConnectionHandler& conHandler=cond::ConnectionHandler::Instance();
 CoralIface::CoralIface (std::string connectionString) : m_connect(connectionString) {
   session=new cond::DBSession;
