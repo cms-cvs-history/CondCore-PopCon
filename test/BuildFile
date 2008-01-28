@@ -1,0 +1,3 @@
+<use name=CondFormats/Calibration>
+<library file=stubs/mySourceHandler.cc name=mySourceHandler>
+</library>

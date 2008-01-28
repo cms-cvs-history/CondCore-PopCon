@@ -18,6 +18,7 @@ namespace cond{
     class CoralSourceHandler:public ExternalSourceHandlerBase<T>{
     public: 
     CoralSourceHandler( cond::CoralTransaction& coraldb );
+    T* operator()();
     virtual ~CoralSourceHandler(){}
     protected:
     coral::ISchema& m_schema;
