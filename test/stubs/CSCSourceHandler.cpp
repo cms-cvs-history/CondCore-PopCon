@@ -46,14 +46,14 @@ void popcon::CSCPedestalsImpl::getNewObjects()
   */
 
   //changed to an empty objec
-  popcon::IOVPair iop = {snc,tll};
-  popcon::IOVPair iop2 = {snc+20,tll};
-  popcon::IOVPair iop3 = {snc+10,tll};
+  popcon::IOVPair iop(snc,tll);
+  popcon::IOVPair iop2(snc+20,tll);
+  popcon::IOVPair iop3(snc+10,tll);
   CSCPedestals * p0 = new CSCPedestals;
   CSCPedestals * p1 = new CSCPedestals;
   CSCPedestals * p2 = new CSCPedestals;
-  m_to_transfer->push_back(std::make_pair((CSCPedestals*)p0,iop));
-  m_to_transfer->push_back(std::make_pair((CSCPedestals*)p1,iop2));
-  m_to_transfer->push_back(std::make_pair((CSCPedestals*)p2,iop3));
+  m_to_transfer.push_back(std::make_pair((CSCPedestals*)p0,iop));
+  m_to_transfer.push_back(std::make_pair((CSCPedestals*)p1,iop2));
+  m_to_transfer.push_back(std::make_pair((CSCPedestals*)p2,iop3));
   std::cout << "CSC src - > getNewObjects -----------\n";
 }
