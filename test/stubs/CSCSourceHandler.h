@@ -22,6 +22,7 @@ namespace popcon{
   class CSCPedestalsImpl : public popcon::PopConSourceHandler<CSCPedestals>{
   public:
     void getNewObjects();
+    std::string id() const { return m_name;}
     ~CSCPedestalsImpl(); 
     CSCPedestalsImpl(const edm::ParameterSet& pset,
 		     const std::string& connect_string); 
