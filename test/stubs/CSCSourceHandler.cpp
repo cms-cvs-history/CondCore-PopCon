@@ -1,8 +1,9 @@
 #include "CSCSourceHandler.h"
 
-popcon::CSCPedestalsImpl::CSCPedestalsImpl(const edm::ParameterSet& pset, 
-					   const std::string& connect_string) : 
-  popcon::PopConSourceHandler<CSCPedestals>(connect_string) {
+popcon::CSCPedestalsImpl::CSCPedestalsImpl(const edm::ParameterSet& pset,
+					   cond::TagInfo const & tagInfo,
+					   cond::LogDBEntry const & logDBEntry) : 
+  popcon::PopConSourceHandler<CSCPedestals>(tagInfo,logDBEntry) {
   m_name = pset.getUntrackedParameter<std::string>("name","CSCPedestals");
   // lgrdr = new LogReader(m_pop_connect);
 }
@@ -18,8 +19,7 @@ void popcon::CSCPedestalsImpl::getNewObjects()
   //check whats already inside of database
   std::map<std::string, popcon::PayloadIOV> mp = getOfflineInfo();
   std::cout<<"got offlineInfo"<<std::endl;
-  for(std::map<std::string, popcon::PayloadIOV>::iterator it = mp.begin(); it != mp.end();it++){
-    std::cout << it->first << " , last object valid since " << it->second.last_since << std::endl;  
+  std::cout << m_tagInfo.name << " , last object valid since " << tagInfo.lastInterval.first << std::endl;  
   }
 
   /*
