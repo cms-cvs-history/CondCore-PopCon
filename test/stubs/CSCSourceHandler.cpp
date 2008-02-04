@@ -26,12 +26,11 @@ void popcon::CSCPedestalsImpl::getNewObjects() {
     std::cout<<"got last run "<<std::endl;
   */
   
-  unsigned int snc,tll;
+  unsigned int snc;
   
-  std::cerr << "Source implementation test ::getNewObjects : enter since ? \n";
+  std::cerr << "Source implementation test ::getNewObjects : enter first since ? \n";
   std::cin >> snc;
-  std::cerr << "getNewObjects : enter till ? \n";
-  std::cin >> tll;
+
 
   //the following code cannot work as event setup is not initialized with a real time!
   //
@@ -44,14 +43,11 @@ void popcon::CSCPedestalsImpl::getNewObjects() {
   */
 
   //changed to an empty objec
-  popcon::IOVPair iop(snc,tll);
-  popcon::IOVPair iop2(snc+20,tll);
-  popcon::IOVPair iop3(snc+10,tll);
   CSCPedestals * p0 = new CSCPedestals;
   CSCPedestals * p1 = new CSCPedestals;
   CSCPedestals * p2 = new CSCPedestals;
-  m_to_transfer.push_back(std::make_pair((CSCPedestals*)p0,iop));
-  m_to_transfer.push_back(std::make_pair((CSCPedestals*)p1,iop2));
-  m_to_transfer.push_back(std::make_pair((CSCPedestals*)p2,iop3));
+  m_to_transfer.push_back(std::make_pair((CSCPedestals*)p0,snc));
+  m_to_transfer.push_back(std::make_pair((CSCPedestals*)p1,snc+20));
+  m_to_transfer.push_back(std::make_pair((CSCPedestals*)p2,snc+10));
   std::cout << "CSC src - > getNewObjects -----------\n";
 }
