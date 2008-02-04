@@ -13,22 +13,21 @@ popcon::CSCPedestalsImpl::~CSCPedestalsImpl()
  
 }
 
-void popcon::CSCPedestalsImpl::getNewObjects()
-{
+void popcon::CSCPedestalsImpl::getNewObjects() {
   std::cout << "------- CSC src - > getNewObjects\n";
   //check whats already inside of database
   std::cout<<"got offlineInfo"<<std::endl;
-  std::cout << m_tagInfo.name << " , last object valid since " << tagInfo.lastInterval.first << std::endl;  
-  }
+  std::cout << m_tagInfo.name << " , last object valid since " << m_tagInfo.lastInterval.first << std::endl;  
 
+  
   /*
-  std::cout<<"about to get last run"<<std::endl;
-  coral::TimeStamp ts = lgrdr->lastRun(m_name, m_cs);
-  std::cout<<"got last run "<<std::endl;
+    std::cout<<"about to get last run"<<std::endl;
+    coral::TimeStamp ts = lgrdr->lastRun(m_name, m_cs);
+    std::cout<<"got last run "<<std::endl;
   */
-
+  
   unsigned int snc,tll;
-	
+  
   std::cerr << "Source implementation test ::getNewObjects : enter since ? \n";
   std::cin >> snc;
   std::cerr << "getNewObjects : enter till ? \n";
