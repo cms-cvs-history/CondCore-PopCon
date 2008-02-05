@@ -14,7 +14,8 @@ void popcon::CSCPedestalsImpl::getNewObjects() {
   std::cout << "------- CSC src - > getNewObjects\n";
   //check whats already inside of database
   std::cout<<"got offlineInfo"<<std::endl;
-  std::cout << m_tagInfo.name << " , last object valid since " << m_tagInfo.lastInterval.first << std::endl;  
+  std::cout << tagInfo().name << " , last object valid since " 
+	    << tagInfo().lastInterval.first << std::endl;  
 
   
   /*
