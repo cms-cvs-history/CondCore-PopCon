@@ -1,9 +1,6 @@
 #include "CSCSourceHandler.h"
 
-popcon::CSCPedestalsImpl::CSCPedestalsImpl(const edm::ParameterSet& pset,
-					   cond::TagInfo const & tagInfo,
-					   cond::LogDBEntry const & logDBEntry) : 
-  popcon::PopConSourceHandler<CSCPedestals>(tagInfo,logDBEntry) {
+popcon::CSCPedestalsImpl::CSCPedestalsImpl(const edm::ParameterSet& pset) {
   m_name = pset.getUntrackedParameter<std::string>("name","CSCPedestals");
   // lgrdr = new LogReader(m_pop_connect);
 }

@@ -23,9 +23,7 @@ namespace popcon{
     void getNewObjects();
     std::string id() const { return m_name;}
     ~CSCPedestalsImpl(); 
-    CSCPedestalsImpl(const edm::ParameterSet& pset,
-		     cond::TagInfo const & tagInfo,
-		     cond::LogDBEntry const & logDBEntry); 
+    CSCPedestalsImpl(const edm::ParameterSet& pset); 
     
   private:
     std::string m_name;

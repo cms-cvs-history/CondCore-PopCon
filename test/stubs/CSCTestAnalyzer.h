@@ -9,6 +9,6 @@
 // class decleration
 //
 
-typedef popcon::PopConAnalyzer<CSCPedestals, popcon::CSCPedestalsImpl> CSCTestAnalyzer;
+typedef popcon::PopConAnalyzer<popcon::CSCPedestalsImpl> CSCTestAnalyzer;
 
 #endif
