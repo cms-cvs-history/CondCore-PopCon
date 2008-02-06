@@ -1,15 +1,8 @@
-<bin name=CoralTest file=stubs/CoralIface.cpp,stubs/doTheQuery.cpp>
-<use name=CondCore/DBCommon>
-<use name=ObjectRelationalAccess>
-<use name=RelationalStorageService>
-<use name=CoralCommon>
-</bin>
-
-<use name=CondFormats/CSCObjects>
+<use name=CondFormats/Calibration>
 <use name=CondFormats/DataRecord>
 <use name=CondCore/PopCon>
 
-<library name=CSCTestAnalyzer file=stubs/CSCSourceHandler.cpp,stubs/CSCTestAnalyzer.cpp,stubs/CSCFakePedestalsConditions.cpp>
+<library name=ExPopConAnalyzer file=stubs/ExSourceHandler.cc, stubs/ExAnalyzer.cc>
   <flags EDM_PLUGIN=1>
 </library>
 
