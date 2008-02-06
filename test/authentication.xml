@@ -5,10 +5,6 @@
 ]>
 
 <connectionlist>
-<connection name="oracle://omds/CMS_TRACKER_DCS">
-<parameter name="user" value="CMS_TRACKER_DCS"/>
-<parameter name="password" value="trackermtcc06"/>
-</connection>
 
 <connection name="oracle://omds/CMS_POP_CON">
 <parameter name="user" value="CMS_POP_CON"/>
