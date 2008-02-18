@@ -4,5 +4,9 @@
 
 <library name=ExPopConAnalyzer file=stubs/ExSourceHandler.cc,stubs/ExAnalyzer.cc>
   <flags EDM_PLUGIN=1>
+
+<library name=ExPopConAnalyzer_new file=stubs/ExSourceHandler_new.cc,stubs/ExAnalyzer_new.cc>
+  <flags EDM_PLUGIN=1>
+
 </library>
 
