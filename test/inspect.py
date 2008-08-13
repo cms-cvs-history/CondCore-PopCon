@@ -10,10 +10,7 @@ os.putenv("CORAL_AUTH_PATH","/afs/cern.ch/cms/DB/conddb")
 rdbms = RDBMS()
 
 logName = "sqlite_file:log.db"
-dbName = "sqlite_file:pop_test.db"
-
-dbName =  "oracle://cms_orcoff_prod/CMS_COND_20X_ECAL"
-logName = "oracle://cms_orcoff_prod/CMS_COND_21X_POPCONLOG"
+dbName = "sqlite_file:pop_test3.db"
 
 rdbms.setLogger(logName)
 from CondCore.Utilities import iovInspector as inspect
@@ -38,22 +35,16 @@ for tag in tags.split() :
 
 iov=0
 
-tag='EcalPedestals_online'
+tag='Example_tag2'
 what = inspect.extractorWhat(db,tag)
-ans = {}
-for key in what.keys():
-    (mode,val) = what[key]
-    if (mode=='single') :
-        ans[key]=val[2]
-    else :
-        ans[key]=[0,2,12]
+print what
 
-
+ans = {'which':[0,2,12],'quantity':[0]}
 iov = inspect.Iov(db,tag)
 print iov.trend(ans)
-ans = {'how': 'all', 'quantity': 'mean_x3', 'which' : []}
-print iov.trend(an)
-ans = {'how': 'singleChannel', 'quantity': 'mean_x6', 'which' : [0,200,1200]}
+ans = {'which':[0,2,12],'quantity':[1]}
+print iov.trend(ans)
+ans = {'which':[0,2,12],'quantity':[0,1]}
 print iov.trend(ans)
 
 
